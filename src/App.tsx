@@ -11,23 +11,27 @@ import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { queryClient } from './utils/api';
 import ProtectedRoute from './components/router/ProtectedRoute';
+import { MuiThemeProvider } from '@material-ui/core';
+import { defaultTheme } from './themes/default';
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
-          <ProtectedRoute path="/dashboard" component={DashboardPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </BrowserRouter>
+    <MuiThemeProvider theme={defaultTheme}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegisterPage} />
+            <ProtectedRoute path="/dashboard" component={DashboardPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </BrowserRouter>
 
-      {/* TODO: remove devtools when deploying */}
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+        {/* TODO: remove devtools when deploying */}
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </MuiThemeProvider>
   );
 }
 

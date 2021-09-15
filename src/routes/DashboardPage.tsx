@@ -4,6 +4,7 @@ import DownJobsAlert from '../components/dashboard/DownJobsAlert';
 import Layout from '../components/shared/Layout';
 import useJobs from '../hooks/dashboard/useJobs';
 import { JobStatus } from '../interfaces/resources/jobs';
+import JobCard from '../components/dashboard/JobCard';
 
 const DashboardPage: React.FC = () => {
   const jobs = useJobs();
@@ -32,9 +33,7 @@ const DashboardPage: React.FC = () => {
         }
       />
       {jobs.data.map(job => (
-        <Typography key={job.id}>
-          {job.jobName} (status: {job.status})
-        </Typography>
+        <JobCard job={job} key={job.id} />
       ))}
     </Layout>
   );
